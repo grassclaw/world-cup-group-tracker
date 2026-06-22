@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b1813" />
-    <title>World Cup 26 | Group Stage Tracker</title>
+    <meta name="description" content="Live 2026 World Cup scores, group standings, and knockout bracket." />
+    <title>World Cup 26 | Live Tournament Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -13,117 +14,121 @@
   <body>
     <div class="page-shell">
       <header class="topbar">
-        <a class="brand" href="#top" aria-label="World Cup 26 home">
+        <a class="brand" href="#top" aria-label="World Cup tracker home">
           <span class="brand-mark">26</span>
           <span>WORLD CUP<br /><b>TRACKER</b></span>
         </a>
         <nav aria-label="Primary navigation">
-          <a class="active" href="#bracket">Groups</a>
-          <a href="#today">Matches</a>
-          <a href="#standings">Standings</a>
+          <a class="active" href="#bracket">Bracket</a>
+          <a href="#matches">Matches</a>
+          <a href="#groups">Groups</a>
         </nav>
-        <button class="timezone" id="timezoneButton" type="button" aria-label="Change displayed timezone">
-          <span class="pulse"></span>
-          <span id="timezoneLabel">LOCAL TIME</span>
-          <span aria-hidden="true">⌄</span>
-        </button>
+        <div class="header-actions">
+          <span class="sync-state" id="syncState"><i></i> Connecting</span>
+          <button class="timezone" id="timezoneButton" type="button" aria-label="Change displayed timezone">
+            <span id="timezoneLabel">LOCAL</span><span aria-hidden="true">⌄</span>
+          </button>
+        </div>
       </header>
 
       <main id="top">
         <section class="hero">
-          <div class="eyebrow"><span></span> Group stage · Matchday 2</div>
+          <div class="eyebrow"><span></span> Live tournament path</div>
           <div class="hero-grid">
             <div>
-              <h1>THE ROAD<br />OUT OF THE <em>GROUPS.</em></h1>
-              <p class="intro">Every result. Every route forward. Follow the teams moving closer to the knockout stage.</p>
+              <h1>THE ROAD<br />TO THE <em>FINAL.</em></h1>
+              <p class="intro">Group results determine the field. From there, every match is win or go home. Follow the full path from 32 teams to one champion.</p>
             </div>
             <div class="hero-meta">
               <div class="date-block">
-                <span>As of</span>
-                <strong>19</strong>
-                <div><b>JUN</b><small>2026</small></div>
+                <span>Today</span>
+                <strong id="todayDay">--</strong>
+                <div><b id="todayMonth">---</b><small>2026</small></div>
               </div>
               <div class="progress-copy">
-                <div><span>GROUP STAGE</span><b>29 / 72</b></div>
-                <div class="progress"><span></span></div>
-                <small>40% complete</small>
+                <div><span>TOURNAMENT</span><b id="progressCount">-- / 104</b></div>
+                <div class="progress"><span id="progressBar"></span></div>
+                <small id="progressLabel">Loading live results...</small>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="today-strip" id="today" aria-labelledby="today-title">
-          <div class="today-title">
-            <span class="live-dot"></span>
-            <div><small>Friday · Jun 19</small><h2 id="today-title">TODAY'S MATCHES</h2></div>
+        <section class="match-center" id="matches" aria-labelledby="matches-title">
+          <div class="match-center-head">
+            <div>
+              <div class="eyebrow light"><span></span> Live match center</div>
+              <h2 id="matches-title">NOW & NEXT</h2>
+            </div>
+            <button class="refresh-button" id="refreshButton" type="button">Refresh scores ↻</button>
           </div>
-          <div class="ticker-results">
-            <article class="ticker-card complete">
-              <small>FT · GROUP D</small>
-              <div><span><i>US</i> USA</span><b>2</b></div>
-              <div><span><i>AU</i> Australia</span><b>0</b></div>
-            </article>
-            <article class="ticker-card complete">
-              <small>FT · GROUP C</small>
-              <div><span><i>MA</i> Morocco</span><b>1</b></div>
-              <div><span><i>SC</i> Scotland</span><b>0</b></div>
-            </article>
-            <article class="ticker-card complete">
-              <small>FT · GROUP C</small>
-              <div><span><i>BR</i> Brazil</span><b>3</b></div>
-              <div><span><i>HT</i> Haiti</span><b>0</b></div>
-            </article>
-            <article class="ticker-card upcoming">
-              <small>NEXT · GROUP D</small>
-              <div><span><i>TR</i> Türkiye</span></div>
-              <div><span><i>PY</i> Paraguay</span></div>
-              <time class="kickoff" data-utc="2026-06-20T03:00:00Z">8:00 PM MST</time>
-            </article>
+          <div class="match-strip" id="matchStrip">
+            <div class="loading-card">Loading the tournament feed...</div>
           </div>
         </section>
 
-        <section class="bracket-section" id="bracket">
+        <section class="bracket-section" id="bracket" aria-labelledby="bracket-title">
           <div class="section-heading">
             <div>
-              <div class="eyebrow"><span></span> Qualification paths</div>
-              <h2>GROUP MATCHES</h2>
+              <div class="eyebrow"><span></span> Win or go home</div>
+              <h2 id="bracket-title">KNOCKOUT BRACKET</h2>
             </div>
-            <div class="filters" role="group" aria-label="Filter groups">
-              <button class="filter active" data-group="all" type="button">All groups</button>
-              <button class="filter" data-group="A" type="button">A</button>
-              <button class="filter" data-group="B" type="button">B</button>
-              <button class="filter" data-group="C" type="button">C</button>
-              <button class="filter" data-group="D" type="button">D</button>
+            <div class="bracket-key">
+              <span><i class="key-qualified"></i> Slot confirmed</span>
+              <span><i class="key-winner"></i> Match winner</span>
+              <span><i class="key-tbd"></i> To be decided</span>
             </div>
           </div>
 
-          <div class="legend" aria-label="Match status legend">
-            <span><i class="legend-win"></i> Winner</span>
-            <span><i class="legend-draw"></i> Draw</span>
-            <span><i class="legend-next"></i> Up next</span>
+          <div class="bracket-note">
+            <b>How it works</b>
+            <span>The top two in every group plus the eight best third-place teams enter here. Each pair plays once; the winner moves one column to the right.</span>
+            <span class="scroll-hint">Swipe bracket →</span>
           </div>
 
-          <div class="bracket" id="bracketGrid" aria-live="polite"></div>
+          <div class="bracket-viewport" tabindex="0" aria-label="Scrollable knockout bracket">
+            <div class="bracket-board" id="bracketBoard">
+              <div class="bracket-loading">Building the live bracket...</div>
+            </div>
+          </div>
         </section>
 
-        <section class="standings-section" id="standings">
-          <div class="standings-copy">
-            <div class="eyebrow"><span></span> The cut line</div>
-            <h2>WHO MOVES ON?</h2>
-            <p>The top two teams in each group advance, joined by the eight best third-place finishers.</p>
+        <section class="groups-section" id="groups" aria-labelledby="groups-title">
+          <div class="section-heading groups-heading">
+            <div>
+              <div class="eyebrow"><span></span> The road in</div>
+              <h2 id="groups-title">GROUP STANDINGS</h2>
+            </div>
+            <p>Green marks teams currently in a direct qualification position. A check means ESPN has marked that team officially advanced.</p>
           </div>
-          <div class="qualification-key">
-            <span><b>1–2</b> Direct qualification</span>
-            <span><b>3</b> Best third-place race</span>
-            <span><b>4</b> Eliminated</span>
+          <div class="groups-grid" id="groupsGrid">
+            <div class="loading-card pale">Loading all 12 groups...</div>
+          </div>
+        </section>
+
+        <section class="format-explainer">
+          <div>
+            <span class="step-number">01</span>
+            <b>48 teams</b>
+            <p>Twelve groups of four play three matches each.</p>
+          </div>
+          <div>
+            <span class="step-number">02</span>
+            <b>32 advance</b>
+            <p>Top two in each group plus eight third-place teams.</p>
+          </div>
+          <div>
+            <span class="step-number">03</span>
+            <b>One survives</b>
+            <p>Five knockout wins take a team from the field to the trophy.</p>
           </div>
         </section>
       </main>
 
       <footer>
         <span>WC26 MATCH CENTER</span>
-        <p>Results snapshot · June 19, 2026</p>
-        <a href="https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026" target="_blank" rel="noreferrer">Official tournament site ↗</a>
+        <p id="footerUpdate">Live data loads when the page opens</p>
+        <a href="https://www.espn.com/soccer/scoreboard/_/league/fifa.world" target="_blank" rel="noreferrer">Scores via ESPN ↗</a>
       </footer>
     </div>
     <script src="app.js"></script>
