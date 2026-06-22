@@ -139,6 +139,8 @@ body.modal-open { overflow: hidden; }
 .projection-row { display: grid; grid-template-columns: 25px 1fr auto; gap: 8px; align-items: center; min-height: 36px; border-bottom: 1px solid rgba(11,24,19,.13); font-size: 10px; }
 .projection-row:last-child { border: 0; }
 .projection-row .seed { color: var(--muted); font: 9px "DM Mono", monospace; }
+.projection-row > span:nth-child(2) { display: flex; align-items: center; min-width: 0; }
+.projection-row img { flex: 0 0 auto; width: 22px; height: 22px; margin-right: 8px; object-fit: contain; }
 .projection-row b { font: 500 10px "DM Mono", monospace; }
 .projection-row.qualifying { font-weight: 800; }
 .modal-section { padding: 40px 54px; border-bottom: 1px solid var(--line); }
