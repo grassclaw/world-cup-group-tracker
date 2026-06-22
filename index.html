@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260621-2" />
+    <link rel="stylesheet" href="styles.css?v=20260621-3" />
   </head>
   <body>
     <div class="page-shell">
@@ -99,7 +99,7 @@
               <div class="eyebrow"><span></span> The road in</div>
               <h2 id="groups-title">GROUP STANDINGS</h2>
             </div>
-            <p>Green marks teams currently in a direct qualification position. A check means ESPN has marked that team officially advanced.</p>
+            <p>Click any group for all six matches, scoring rules, team form scores, and projected qualification order.</p>
           </div>
           <div class="groups-grid" id="groupsGrid">
             <div class="loading-card pale">Loading all 12 groups...</div>
@@ -125,12 +125,20 @@
         </section>
       </main>
 
+      <div class="modal-shell" id="groupModal" aria-hidden="true">
+        <button class="modal-backdrop" type="button" data-close-modal aria-label="Close group details"></button>
+        <section class="group-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <button class="modal-close" type="button" data-close-modal aria-label="Close group details">Close ×</button>
+          <div id="modalContent"></div>
+        </section>
+      </div>
+
       <footer>
         <span>WC26 MATCH CENTER</span>
         <p id="footerUpdate">Live data loads when the page opens</p>
         <a href="https://www.espn.com/soccer/scoreboard/_/league/fifa.world" target="_blank" rel="noreferrer">Scores via ESPN ↗</a>
       </footer>
     </div>
-    <script src="app.js?v=20260621-2"></script>
+    <script src="app.js?v=20260621-3"></script>
   </body>
 </html>
